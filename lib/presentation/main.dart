@@ -54,7 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
             itemCount: todolists.length,
             itemBuilder: (BuildContext context, int index) {
-              return Text(todolists[0]);
+              return Text(
+                todolists[index],
+                style: TextStyle(fontSize: 80),
+              );
             },
           ),
         ),
