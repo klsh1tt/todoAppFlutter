@@ -38,16 +38,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(todo),
-          content: TextField(
-            onChanged: (value) {
-              setState(() {
-                todo = value;
-              });
-            },
-          ),
-        );
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text(todo),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  todo = value;
+                });
+              },
+            ),
+          );
+        });
       },
     );
   }
