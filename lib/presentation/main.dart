@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,9 +55,25 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
             itemCount: todolists.length,
             itemBuilder: (BuildContext context, int index) {
-              return Text(
-                todolists[index],
-                style: TextStyle(fontSize: 80),
+              return Slidable(
+                key: const ValueKey(0),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  dismissible: DismissiblePane(onDismissed: () {}),
+                  children: const [
+                    SlidableAction(
+                      onPressed: doNothing,
+                      backgroundColor: Color(0xFFFE4A49),
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: Text(
+                  todolists[index],
+                  style: TextStyle(fontSize: 80),
+                ),
               );
             },
           ),
@@ -65,3 +82,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+void doNothing(BuildContext context) {}
