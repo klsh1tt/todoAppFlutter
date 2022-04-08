@@ -32,13 +32,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> todolists = ["111", "222", "333"];
+  String todo = "";
 
   displaydialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("data"),
+          title: Text(todo),
+          content: TextField(
+            onChanged: (value) {
+              setState(() {
+                todo = value;
+              });
+            },
+          ),
         );
       },
     );
