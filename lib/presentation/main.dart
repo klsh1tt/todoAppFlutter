@@ -48,6 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
+            actions: [
+              ElevatedButton(
+                  onPressed: todo.isEmpty
+                      ? null
+                      : () {
+                          setState() {
+                            todolists.add(todo);
+                            Navigator.pop(context);
+                          }
+                        },
+                  child: Text("Add")),
+            ],
           );
         });
       },
