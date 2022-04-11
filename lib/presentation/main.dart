@@ -31,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController textcontroller = TextEditingController();
   List<String> todolists = ["111", "222", "333"];
   String todo = "";
 
@@ -38,30 +39,35 @@ class _MyHomePageState extends State<MyHomePage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return StatefulBuilder(builder: (context, setState) {
-          return AlertDialog(
-            title: Text(todo),
-            content: TextField(
-              onChanged: (value) {
-                setState(() {
-                  todo = value;
-                });
-              },
-            ),
-            actions: [
-              ElevatedButton(
-                  onPressed: todo.isEmpty
-                      ? null
-                      : () {
-                          setState() {
-                            todolists.add(todo);
-                            Navigator.pop(context);
-                          }
-                        },
-                  child: Text("Add")),
-            ],
-          );
-        });
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(todo),
+              content: TextField(
+                controller: textcontroller,
+                onChanged: (value) {
+                  setState(() {
+                    todo = value;
+                  });
+                },
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: todo.isEmpty
+                        ? null
+                        : () {
+                            setState(
+                              () {
+                                todolists.add(todo);
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                    child: Text("Add")),
+              ],
+            );
+          },
+        );
       },
     );
   }
